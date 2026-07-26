@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnimeHub — Your Ultimate Anime Destination</title>
+  <meta name="description" content="Discover AnimeHub — the ultimate app to watch, search, and track your favorite anime, movies, TV series, and cartoons. Free HD streaming, regular updates, and more.">
+  <meta name="theme-color" content="#7c3aed">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0a0a0f;
+      color: #f0e6ff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0a0a0f; }
+    ::-webkit-scrollbar-thumb { background: #2a1a3e; border-radius: 4px; }
+
+    #particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    #particles span {
+      position: absolute;
+      width: 4px; height: 4px;
+      background: #7c3aed;
+      border-radius: 50%;
+      animation: float linear infinite;
+      opacity: 0.3;
+    }
+    #particles span:nth-child(1) { left: 10%; width: 6px; height: 6px; animation-duration: 12s; animation-delay: 0s; }
+    #particles span:nth-child(2) { left: 20%; animation-duration: 15s; animation-delay: 1s; }
+    #particles span:nth-child(3) { left: 35%; width: 5px; height: 5px; animation-duration: 18s; animation-delay: 2s; }
+    #particles span:nth-child(4) { left: 50%; animation-duration: 14s; animation-delay: 0.5s; }
+    #particles span:nth-child(5) { left: 65%; width: 7px; height: 7px; animation-duration: 20s; animation-delay: 3s; }
+    #particles span:nth-child(6) { left: 75%; animation-duration: 16s; animation-delay: 1.5s; }
+    #particles span:nth-child(7) { left: 85%; width: 5px; height: 5px; animation-duration: 13s; animation-delay: 0.8s; }
+    #particles span:nth-child(8) { left: 90%; animation-duration: 19s; animation-delay: 2.5s; }
+    #particles span:nth-child(9) { left: 45%; width: 6px; height: 6px; animation-duration: 17s; animation-delay: 1.2s; }
+    #particles span:nth-child(10) { left: 15%; animation-duration: 11s; animation-delay: 3.5s; }
+    #particles span:nth-child(11) { left: 55%; width: 3px; height: 3px; animation-duration: 14s; animation-delay: 0.3s; }
+    #particles span:nth-child(12) { left: 70%; animation-duration: 16s; animation-delay: 2.2s; }
+    #particles span:nth-child(13) { left: 30%; width: 5px; height: 5px; animation-duration: 12s; animation-delay: 1.8s; }
+    #particles span:nth-child(14) { left: 80%; animation-duration: 18s; animation-delay: 0.6s; }
+    #particles span:nth-child(15) { left: 5%; width: 4px; height: 4px; animation-duration: 15s; animation-delay: 2.8s; }
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 0.4; }
+      90% { opacity: 0.4; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 40px 24px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      border-radius: 50px;
+      background: rgba(124,58,237,0.15);
+      border: 1px solid rgba(124,58,237,0.3);
+      color: #c084fc;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      margin-bottom: 32px;
+      animation: fadeDown 0.8s ease-out;
+    }
+    .hero-badge span { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .hero-title {
+      font-size: clamp(48px, 10vw, 96px);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 16px;
+      animation: fadeUp 0.8s ease-out 0.2s both;
+    }
+    .hero-title .gradient {
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(18px, 3vw, 28px);
+      color: #a08ac0;
+      font-weight: 500;
+      max-width: 700px;
+      margin-bottom: 12px;
+      animation: fadeUp 0.8s ease-out 0.4s both;
+    }
+    .hero-desc {
+      font-size: 16px;
+      color: #605080;
+      max-width: 550px;
+      margin-bottom: 40px;
+      animation: fadeUp 0.8s ease-out 0.5s both;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.8s ease-out 0.6s both;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      color: #fff;
+      box-shadow: 0 4px 30px rgba(124,58,237,0.4);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 50px rgba(124,58,237,0.5);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      color: #f0e6ff;
+      border: 1px solid rgba(124,58,237,0.2);
+    }
+    .btn-secondary:hover {
+      background: rgba(124,58,237,0.15);
+      border-color: rgba(124,58,237,0.4);
+      transform: translateY(-3px);
+    }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: #605080;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: fadeUp 0.8s ease-out 1s both;
+    }
+    .scroll-indicator .mouse {
+      width: 24px; height: 38px;
+      border: 2px solid #2a1a3e;
+      border-radius: 12px;
+      position: relative;
+    }
+    .scroll-indicator .mouse::after {
+      content: '';
+      position: absolute;
+      top: 6px; left: 50%;
+      transform: translateX(-50%);
+      width: 3px; height: 8px;
+      background: #7c3aed;
+      border-radius: 2px;
+      animation: scrollAnim 2s infinite;
+    }
+    @keyframes scrollAnim { 0% { opacity: 1; transform: translateX(-50%) translateY(0); } 100% { opacity: 0; transform: translateX(-50%) translateY(12px); } }
+
+    .section { padding: 100px 0; }
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .section-tag {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 50px;
+      background: rgba(124,58,237,0.1);
+      color: #c084fc;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .section-title .gradient {
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-desc {
+      font-size: 18px;
+      color: #a08ac0;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .about-text h3 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .about-text p {
+      color: #a08ac0;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .stat-card {
+      background: rgba(20,20,40,0.6);
+      border: 1px solid rgba(124,58,237,0.12);
+      border-radius: 16px;
+      padding: 28px 16px;
+      text-align: center;
+      backdrop-filter: blur(20px);
+      transition: all 0.3s ease;
+    }
+    .stat-card:hover {
+      border-color: rgba(124,58,237,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 40px rgba(124,58,237,0.1);
+    }
+    .stat-number {
+      font-size: 36px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label {
+      color: #605080;
+      font-size: 13px;
+      font-weight: 500;
+      margin-top: 6px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: rgba(20,20,40,0.6);
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 20px;
+      padding: 32px 28px;
+      text-align: center;
+      backdrop-filter: blur(20px);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, rgba(124,58,237,0.05), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(124,58,237,0.3);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-icon {
+      width: 64px; height: 64px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(236,72,153,0.1));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 28px;
+    }
+    .feature-card h4 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .feature-card p {
+      color: #a08ac0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    .category-card {
+      background: rgba(20,20,40,0.5);
+      border: 1px solid rgba(124,58,237,0.1);
+      border-radius: 16px;
+      padding: 28px 20px;
+      text-align: center;
+      cursor: default;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      backdrop-filter: blur(10px);
+    }
+    .category-card:hover {
+      background: rgba(124,58,237,0.12);
+      border-color: rgba(124,58,237,0.3);
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: 0 12px 40px rgba(124,58,237,0.15);
+    }
+    .category-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .category-card h5 {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .why-card {
+      display: flex;
+      gap: 20px;
+      background: rgba(20,20,40,0.5);
+      border: 1px solid rgba(124,58,237,0.08);
+      border-radius: 18px;
+      padding: 28px 24px;
+      backdrop-filter: blur(20px);
+      transition: all 0.3s ease;
+    }
+    .why-card:hover {
+      border-color: rgba(124,58,237,0.25);
+      transform: translateX(6px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    }
+    .why-icon {
+      font-size: 32px;
+      flex-shrink: 0;
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: rgba(124,58,237,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .why-card h5 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .why-card p {
+      color: #a08ac0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .cta-section {
+      text-align: center;
+      padding: 120px 24px;
+      position: relative;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .cta-box {
+      background: rgba(20,20,40,0.6);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 32px;
+      padding: 64px 40px;
+      backdrop-filter: blur(20px);
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .cta-box h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .cta-box p {
+      color: #a08ac0;
+      font-size: 16px;
+      margin-bottom: 36px;
+    }
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 44px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      box-shadow: 0 4px 30px rgba(124,58,237,0.4);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-download::after {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
+      transition: 0.6s;
+      transform: translateX(-100%) rotate(45deg);
+    }
+    .btn-download:hover::after { transform: translateX(100%) rotate(45deg); }
+    .btn-download:hover {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 12px 60px rgba(124,58,237,0.5);
+    }
+    .download-links {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 16px;
+      font-size: 13px;
+      color: #605080;
+    }
+    .download-links a { color: #c084fc; text-decoration: none; }
+    .download-links a:hover { text-decoration: underline; }
+
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid rgba(124,58,237,0.06);
+      color: #605080;
+      font-size: 14px;
+    }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+
+    .glow-line {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(124,58,237,0.3), transparent);
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-stats { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .stat-card { padding: 20px 12px; }
+      .cta-box { padding: 40px 24px; }
+      .hero-title { font-size: 44px; }
+      .features-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    }
+    @media (max-width: 480px) {
+      .about-stats { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: center; }
+      .btn { width: 100%; justify-content: center; }
+      .categories { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="particles">
+  <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<section class="hero">
+  <div class="hero-badge"><span></span> Now Available</div>
+  <h1 class="hero-title">
+    Welcome to <span class="gradient">AnimeHub</span>
+  </h1>
+  <p class="hero-sub">Your Ultimate Anime &amp; Entertainment Destination</p>
+  <p class="hero-desc">Search, watch, and track thousands of anime, movies, TV series, and cartoons — all in one place. Free, fast, and beautifully designed.</p>
+  <div class="hero-actions">
+    <a href="#download" class="btn btn-primary">&#11088; Get AnimeHub Now</a>
+    <a href="#features" class="btn btn-secondary">Explore Features &#8595;</a>
+  </div>
+  <div class="scroll-indicator">
+    <div class="mouse"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <span class="section-tag">What is AnimeHub?</span>
+        <h3>The Ultimate App for Anime Lovers</h3>
+        <p>
+          <strong>AnimeHub</strong> is a powerful, all-in-one anime discovery and tracking platform. Whether you're into action-packed adventures, romantic stories, spine-chilling horrors, or epic fantasy worlds — AnimeHub has it all.
+        </p>
+        <p>
+          With a sleek, modern interface and real-time updates, you can search any anime, browse by genre, check schedules, build your watchlist, and stay connected with the community. No ads, no hassle — just pure anime bliss.
+        </p>
+        <p>
+          From the latest blockbuster movies to classic TV series, from trending shows to hidden gems — every piece of content is just a tap away.
+        </p>
+      </div>
+      <div class="reveal">
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-number">10K+</div>
+            <div class="stat-label">Anime Titles</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Genres</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Updates</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Features</span>
+      <h2 class="section-title">Everything You Need in <span class="gradient">One App</span></h2>
+      <p class="section-desc">AnimeHub is packed with features designed to give you the best anime experience possible.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">&#127916;</div>
+        <h4>Movies &amp; Films</h4>
+        <p>Watch the latest anime movies and classic films in HD quality. From Studio Ghibli to Shinkai — every masterpiece is here.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">&#128250;</div>
+        <h4>TV Series</h4>
+        <p>Full seasons of your favorite anime TV shows. Binge-watch Attack on Titan, Jujutsu Kaisen, One Piece, and many more.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">&#127918;</div>
+        <h4>Cartoons &amp; More</h4>
+        <p>Not just anime — find western cartoons, animated series, and specials all in one place for your entertainment.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">&#128269;</div>
+        <h4>Smart Search</h4>
+        <p>Search by name, genre, status, type, or rating. Filter and sort to find exactly what you're looking for instantly.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">&#128221;</div>
+        <h4>Watchlist</h4>
+        <p>Save anime to your personal watchlist. Track what you've watched and never lose track of your favorite shows.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">&#128200;</div>
+        <h4>Trending &amp; Top Rated</h4>
+        <p>Discover trending anime, top rated shows, and popular picks. Stay updated with what everyone is watching.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">&#9203;</div>
+        <h4>Schedule &amp; Calendar</h4>
+        <p>Never miss an episode. Check the release schedule and plan your watch time with the built-in calendar.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">&#127775;</div>
+        <h4>Personalized Picks</h4>
+        <p>Get recommendations tailored to your taste. The more you watch, the better your recommendations become.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<section class="section" id="categories">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Content Library</span>
+      <h2 class="section-title">Explore <span class="gradient">Thousands</span> of Titles</h2>
+      <p class="section-desc">Whatever your mood, AnimeHub has something for everyone across every genre.</p>
+    </div>
+    <div class="categories">
+      <div class="category-card reveal"><span class="category-icon">&#127910;</span><h5>Movies</h5></div>
+      <div class="category-card reveal"><span class="category-icon">&#128250;</span><h5>TV Series</h5></div>
+      <div class="category-card reveal"><span class="category-icon">&#9876;</span><h5>Action</h5></div>
+      <div class="category-card reveal"><span class="category-icon">&#10084;</span><h5>Romance</h5></div>
+      <div class="category-card reveal"><span class="category-icon">&#128514;</span><h5>Comedy</h5></div>
+      <div class="category-card reveal"><span class="category-icon">&#128128;</span><h5>Horror</h5></div>
+      <div class="category-card reveal"><span class="category-icon">&#129668;</span><h5>Fantasy</h5></div>
+      <div class="category-card reveal"><span class="category-icon">&#9889;</span><h5>Adventure</h5></div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<section class="section" id="why">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Why AnimeHub?</span>
+      <h2 class="section-title">Built for <span class="gradient">Anime Fans</span></h2>
+      <p class="section-desc">Here's why thousands of users choose AnimeHub every day.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon">&#128274;</div>
+        <div>
+          <h5>100% Free</h5>
+          <p>No subscriptions, no hidden charges. Every feature is completely free to use, forever.</p>
+        </div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">&#127775;</div>
+        <div>
+          <h5>HD Quality</h5>
+          <p>Enjoy crisp, high-definition streaming with smooth playback and minimal buffering.</p>
+        </div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">&#128260;</div>
+        <div>
+          <h5>Regular Updates</h5>
+          <p>New anime, episodes, and features added daily. You'll never run out of things to watch.</p>
+        </div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">&#128640;</div>
+        <div>
+          <h5>Lightning Fast</h5>
+          <p>Optimized for speed. Search, browse, and load content in milliseconds.</p>
+        </div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">&#128295;</div>
+        <div>
+          <h5>Beautiful Design</h5>
+          <p>Modern, intuitive, and elegant UI with smooth animations and a dark theme that's easy on the eyes.</p>
+        </div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">&#128275;</div>
+        <div>
+          <h5>Community Driven</h5>
+          <p>Join a growing community of anime lovers. Share reviews, compare favorites, and discover together.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<section class="cta-section" id="download">
+  <div class="container">
+    <div class="cta-box reveal">
+      <h2>Ready to Dive Into <span class="gradient">AnimeWorld</span>?</h2>
+      <p>Download AnimeHub now and start exploring thousands of anime, movies, TV series, and cartoons. Your ultimate entertainment hub is waiting.</p>
+      <a href="https://t.me/Darkphobiacreator" target="_blank" rel="noopener noreferrer" class="btn-download">&#11088; Download AnimeHub Now</a>
+      <div class="download-links">
+        <span>Join our <a href="https://t.me/Darkphobiacreator" target="_blank" rel="noopener noreferrer">Telegram channel</a> for latest updates &amp; support</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 <strong>AnimeHub</strong>. All rights reserved. | Made with &#10084; for anime fans everywhere.</p>
+    <p style="margin-top: 8px;">AnimeHub — Discover &middot; Watch &middot; Track</p>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const revealElements = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  revealElements.forEach(function (el) { observer.observe(el); });
+
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
